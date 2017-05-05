@@ -1,12 +1,18 @@
 import datetime
 import os
+import sys
 
 from sqlalchemy import (Boolean, Column, DateTime, Float, ForeignKey, Integer,
                         String, Table, create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 
-engine = create_engine(os.environ.get("DATABASE_URL"))
+database_url = os.environ.get("DATABASE_URL")
+if database_url is None:
+	print("ERROR: DATABASE_URL not set")
+	sys.exit()
+
+engine = create_engine(database_url)
 Base = declarative_base()
 
 Session = sessionmaker()
