@@ -17,6 +17,7 @@ needed dependencies.
 ## How to run
 
 Flask application can be run easily, for example via flask embedded server (for debug).
+
 Remember: **always** `source` the virtual environment before starting anything.
 
 ```bash
