@@ -30,5 +30,6 @@ To deploy the app, you should go with an high-performance web server, such as [T
 It can be started at port 5000 (customizable) simply by
 
 ```bash
+    export DATABASE_URL="link to your database"
     PORT=5000 python webapp.py
 ```
