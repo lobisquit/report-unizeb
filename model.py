@@ -1,4 +1,5 @@
 import datetime
+import json
 import os
 import sys
 
@@ -26,6 +27,12 @@ class Measure(Base):
 	temperature = Column(Integer, nullable=False)
 	humidity = Column(Integer, nullable=False)
 	brightness = Column(Integer, nullable=False)
+
+	def to_json(self):
+		return json.dumps(
+			{'temperature': self.temperature,
+			'humidity': self.humidity,
+			'brightness': self.brightness})
 
 	def __repr__(self):
 		return 'Measure(datetime="{}", temperature={}, humidity={}, brightness={})'\

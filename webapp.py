@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from datetime import date, datetime
@@ -14,6 +15,11 @@ app = Flask(__name__)
 @app.route('/')
 def root_page():
 	return "<br>".join( [repr(m) for m in session.query(Measure).all()] )
+
+@app.route('/last_datum', methods=['GET', 'POST'])
+def last_datum():
+	last_measure = session.query(Measure).order_by(Measure.date_time.desc()).first()
+	return last_measure.to_json()
 
 @app.route('/arduino', methods=['GET', 'POST'])
 def parse_request():
