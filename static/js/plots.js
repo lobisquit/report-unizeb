@@ -3,8 +3,11 @@ var temp = new TimeSeries();
 var hum = new TimeSeries();
 var brightness = new TimeSeries();
 setInterval(function() {
-	var json = $.getJSON("http://unizeb.herokuapp.com/last_datum");
+	var json = getJSON("http://unizeb.herokuapp.com/last_datum", function(err, data) {});
+	console.log(json);
+
 	obj = JSON.parse(json);
+	console.log(obj);
 	temp.append(new Date().getTime(), obj.temperature);
 	hum.append(new Date().getTime(), obj.humidity);
 	bright.append(new Date().getTime(), obj.humidity);
@@ -24,6 +27,21 @@ setInterval(function() {
 // 	});
 // }
 
+var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status == 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status);
+      }
+    };
+    xhr.send();
+};
+
 function on_request_success(response) {
 	console.debug('response', response);
 }
@@ -33,9 +51,7 @@ function on_request_error(r, text_status, error_thrown) {
 }
 
 function createPlots(){
-	var smoothie
-
-	smoothie = new SmoothieChart({
+	var smoothie = new SmoothieChart({
 		grid: { strokeStyle: 'rgb(125, 0, 0)',
 		fillStyle: 'rgb(60, 0, 0)',
 		lineWidth: 1,
