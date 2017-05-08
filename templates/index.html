@@ -14,11 +14,11 @@ and https://www.w3schools.com/w3css/tryw3css_templates_food_blog.htm -->
 	<!-- Other stlesheet -->
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 
 	<!-- Dynamic plotting library -->
-	<script type="text/javascript" src="js/smoothie.js"></script>
-	<script type="text/javascript" src="js/plots.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/smoothie.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/plots.js') }}"></script>
 </head>
 <body class="w3-light-grey" onLoad="createPlots()">
 
