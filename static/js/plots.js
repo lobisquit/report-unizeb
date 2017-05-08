@@ -1,12 +1,36 @@
 // Random data, just for testing purposes
-var line1 = new TimeSeries();
-var line2 = new TimeSeries();
-var line3 = new TimeSeries();
+var temp = new TimeSeries();
+var hum = new TimeSeries();
+var brightness = new TimeSeries();
 setInterval(function() {
-	line1.append(new Date().getTime(), Math.random());
-	line2.append(new Date().getTime(), Math.random());
-	line3.append(new Date().getTime(), Math.random());
+	var json = $.getJSON("http://unizeb.herokuapp.com/last_datum");
+	obj = JSON.parse(json);
+	temp.append(new Date().getTime(), obj.temperature);
+	hum.append(new Date().getTime(), obj.humidity);
+	bright.append(new Date().getTime(), obj.humidity);
 }, 1000);
+
+// while (true) {
+// 	var request = 0;
+// 	jQuery.ajax({
+// 		url: { url:  window.location.pathname },
+// 		type: 'POST',
+// 		cache: false,
+// 		data: JSON.stringify(request),
+// 		contentType: 'application/json',
+// 		processData: false,
+// 		success: on_request_success,
+// 		error: on_request_error
+// 	});
+// }
+
+function on_request_success(response) {
+	console.debug('response', response);
+}
+
+function on_request_error(r, text_status, error_thrown) {
+	console.debug('error', text_status + ", " + error_thrown + ":\n" + r.responseText);
+}
 
 function createPlots(){
 	var smoothie
@@ -18,13 +42,9 @@ function createPlots(){
 		millisPerLine: 250,
 		verticalSections: 6,
 		responsive: true} });
-	smoothie.addTimeSeries(line1, {
+	smoothie.addTimeSeries(temp, {
 		strokeStyle: 'rgb(0, 255, 0)',
 		fillStyle: 'rgba(0, 255, 0, 0.4)',
-		lineWidth: 3 });
-	smoothie.addTimeSeries(line2, {
-		strokeStyle: 'rgb(255, 0, 255)',
-		fillStyle: 'rgba(255, 0, 255, 0.3)',
 		lineWidth: 3 });
 	temp1_canvas = document.getElementById("temp1");
 	fitToContainer(temp1_canvas);
@@ -37,7 +57,7 @@ function createPlots(){
 		millisPerLine: 250,
 		verticalSections: 6,
 		responsive: true} });
-	smoothie.addTimeSeries(line3, {
+	smoothie.addTimeSeries(hum, {
 		strokeStyle: 'rgb(140, 0, 120)',
 		fillStyle: 'rgba(140, 0, 120, 0.4)',
 		lineWidth: 3 });

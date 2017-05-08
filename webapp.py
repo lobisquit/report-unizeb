@@ -13,7 +13,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def root_page():
-	return "<br>".join( [repr(m) for m in session.query(Measure).all()] )
+	# return "<br>".join( [repr(m) for m in session.query(Measure).all()] )
+	return render_template('index.html')
 
 @app.route('/arduino', methods=['GET', 'POST'])
 def parse_request():
