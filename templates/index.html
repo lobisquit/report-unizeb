@@ -18,6 +18,7 @@ and https://www.w3schools.com/w3css/tryw3css_templates_food_blog.htm -->
 
 	<!-- Dynamic plotting library -->
 	<script type="text/javascript" src="{{ url_for('static', filename='js/smoothie.js') }}"></script>
+	<script src="//www.chartjs.org/assets/Chart.min.js"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/plots.js') }}"></script>
 </head>
 <body class="w3-light-grey" onLoad="createPlots()">
@@ -41,10 +42,10 @@ and https://www.w3schools.com/w3css/tryw3css_templates_food_blog.htm -->
 		<!-- Graphs section -->
 		<div class="w3-row-padding w3-padding-16 w3-center">
 			<div class="col-sm-12 col-lg-6">
-				<canvas class="plotcanvas" id="temp1">Content not supported</canvas>
+				<canvas class="plotcanvas" id="temp-canvas">Content not supported</canvas>
 			</div>
 			<div class="col-sm-12 col-lg-6">
-				<canvas class="plotcanvas" id="hum1">Content not supported</canvas>
+				<canvas class="plotcanvas" id="hum-canvas">Content not supported</canvas>
 			</div>
 		</div>
 	<!-- End page content -->
