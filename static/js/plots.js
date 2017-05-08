@@ -3,44 +3,17 @@ var temp = new TimeSeries();
 var hum = new TimeSeries();
 var brightness = new TimeSeries();
 setInterval(function() {
-	var json = getJSON("http://unizeb.herokuapp.com/last_datum", function(err, data) {});
-	console.log(json);
+	// retrieve last measure and append to collection of measures
+	var last_request = new XMLHttpRequest()
+	last_request.open("GET", "/last_datum", false);
+	last_request.send();
 
-	obj = JSON.parse(json);
-	console.log(obj);
-	temp.append(new Date().getTime(), obj.temperature);
-	hum.append(new Date().getTime(), obj.humidity);
-	bright.append(new Date().getTime(), obj.humidity);
+	var measure = JSON.parse(last_request.response);
+
+	temp.append(new Date().getTime(), measure.temperature);
+	hum.append(new Date().getTime(), measure.humidity);
+	brightness.append(new Date().getTime(), measure.brightness);
 }, 1000);
-
-// while (true) {
-// 	var request = 0;
-// 	jQuery.ajax({
-// 		url: { url:  window.location.pathname },
-// 		type: 'POST',
-// 		cache: false,
-// 		data: JSON.stringify(request),
-// 		contentType: 'application/json',
-// 		processData: false,
-// 		success: on_request_success,
-// 		error: on_request_error
-// 	});
-// }
-
-var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status == 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status);
-      }
-    };
-    xhr.send();
-};
 
 function on_request_success(response) {
 	console.debug('response', response);

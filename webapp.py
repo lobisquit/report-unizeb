@@ -20,7 +20,11 @@ def root_page():
 @app.route('/last_datum', methods=['GET', 'POST'])
 def last_datum():
 	last_measure = session.query(Measure).order_by(Measure.date_time.desc()).first()
-	return last_measure.to_json()
+	response = app.response_class(
+		response=last_measure.to_json(),
+		status=200,
+		mimetype='application/json')
+	return response
 
 @app.route('/arduino', methods=['GET', 'POST'])
 def parse_request():
