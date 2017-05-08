@@ -1,15 +1,17 @@
+var NUMBER_OF_POINTS = 15;
+
 function createPlots(){
 	var canvas = document.getElementById('temp-canvas'),
 	    ctx = canvas.getContext('2d'),
 	    startingData = {
-	      labels: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],// new Array(20),
+	      labels: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0),// new Array(20),
 	      datasets: [
 	          {
 	              fillColor: "rgba(220,220,220,0.2)",
 	              strokeColor: "rgba(220,220,220,1)",
 	              pointColor: "rgba(220,220,220,1)",
 	              pointStrokeColor: "#fff",
-	            //   data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	                data: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0)
 	          }
 	      ]
 	    };
@@ -28,7 +30,7 @@ function createPlots(){
 
 		// Add two random numbers for each dataset
 		if (true) {
-			var correctedTemp = parseInt(measure.temperature) + Math.random()*2-1
+			var correctedTemp = parseInt(measure.temperature) + (Math.random()-0.5)*1
 			temp_chart.addData([correctedTemp], measure.time);
 			prevTime = measure.time
 			// Remove the first point so we dont just add values forever
