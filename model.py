@@ -30,7 +30,8 @@ class Measure(Base):
 
 	def to_json(self):
 		return json.dumps(
-			{'temperature': self.temperature,
+			{'time' : self.date_time.strftime('%H:%M:%S'),
+			'temperature': self.temperature,
 			'humidity': self.humidity,
 			'brightness': self.brightness})
 
