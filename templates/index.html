@@ -9,15 +9,15 @@ and https://www.w3schools.com/w3css/tryw3css_templates_food_blog.htm -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Bootstrap -->
-	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/jumbotron-narrow.css') }}" rel="stylesheet">
 	<!-- Other stlesheet -->
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-raleway.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 
 	<!-- Dynamic plotting library -->
-	<script src="//www.chartjs.org/assets/Chart.min.js"></script>
+	<script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/plots.js') }}"></script>
 </head>
 <body class="w3-light-grey" onLoad="createPlots()">

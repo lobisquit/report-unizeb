@@ -1,4 +1,4 @@
-var NUMBER_OF_POINTS = 15;
+var NUMBER_OF_POINTS = 60;
 var ANIMATION_SECONDS = 2;
 
 
@@ -53,12 +53,6 @@ function createPlots(){
 					data: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0)
 				}
 			],
-			options: {
-				title: {
-					display: true,
-					text: 'Custom Chart Title'
-				}
-			}
 		};
 	canvas = document.getElementById('lum-canvas'),
 		lum_ctx = canvas.getContext('2d'),
@@ -84,9 +78,8 @@ function createPlots(){
 
 	// Reduce the animation steps for demo clarity.
 	var temp_chart = new Chart(temp_ctx).Line(temp_startingData, temp_options);
-	var hum_chart = new Chart(hum_ctx).Line(hum_startingData);
+	var hum_chart = new Chart(hum_ctx).Line(hum_startingData, {});
 	var lum_chart = new Chart(lum_ctx).Line(lum_startingData);
-
 
 	var prevTime = undefined;
 
