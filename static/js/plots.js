@@ -91,23 +91,24 @@ function createPlots(){
 		var measure = JSON.parse(last_request.response);
 
 		// Add two random numbers for each dataset
-		if (prevTime!=measure.time) {
-			var correctedTemp = parseInt(measure.temperature) + (Math.random()-0.5)*1;
-			temp_chart.addData([correctedTemp], measure.time);
+		if (measure.temperature < 1000 & measure.humidity < 1000 & measure.brightness < 1000) {
+			if (prevTime!=measure.time) {
+				var correctedTemp = parseInt(measure.temperature) + (Math.random()-0.5)*1;
+				temp_chart.addData([correctedTemp], measure.time);
 
-			var correctedHum = parseInt(measure.humidity) + (Math.random()-0.5)*1;
-			hum_chart.addData([correctedHum], measure.time);
+				var correctedHum = parseInt(measure.humidity) + (Math.random()-0.5)*1;
+				hum_chart.addData([correctedHum], measure.time);
 
-			var correctedLum = parseInt(measure.brightness) + (Math.random()-0.5)*1;
-			lum_chart.addData([correctedLum], measure.time);
+				var correctedLum = parseInt(measure.brightness) + (Math.random()-0.5)*1;
+				lum_chart.addData([correctedLum], measure.time);
 
-			prevTime = measure.time;
+				prevTime = measure.time;
 
-			// Remove the first point so we dont just add values forever
-			temp_chart.removeData();
-			hum_chart.removeData();
-			lum_chart.removeData();
-
+				// Remove the first point so we dont just add values forever
+				temp_chart.removeData();
+				hum_chart.removeData();
+				lum_chart.removeData();
+			}
 		}
 	}, 1000);
 }
