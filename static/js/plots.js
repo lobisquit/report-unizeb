@@ -1,85 +1,74 @@
 var NUMBER_OF_POINTS = 60;
-var ANIMATION_SECONDS = 2;
+var ANIMATION_SECONDS = 0.1;
+
+function createPlots() {
+	Chart.defaults.global.animationSteps = Math.round(ANIMATION_SECONDS * 1000 / 17);
+
+	var options = {
+
+		responsive: false,
+		maintainAspectRatio: false
+	};
 
 
-Chart.defaults.global.animationSteps = Math.round(ANIMATION_SECONDS * 1000 / 17);
+	var temp_data = {
+		labels: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0),
+		datasets: [
+			{
+				label: "Temperature",
+				fillColor: "rgba(220,220,220,0.2)",
+				strokeColor: "rgba(220,220,220,1)",
+				pointColor: "rgba(220,220,220,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(220,220,220,1)",
+				data: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0)
+			},
+		]
+	};
+	var temp_options = options;
+	var temp_ctx = document.getElementById("temp-canvas").getContext("2d");
+	var temp_chart = new Chart(temp_ctx).Line(temp_data, options);
 
-function createPlots(){
-	var canvas
-	canvas = document.getElementById('temp-canvas'),
-		temp_ctx = canvas.getContext('2d'),
-		temp_startingData = {
-			labels: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0),
-			datasets: [
-				{
-					fillColor: "rgba(237, 72, 47,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					data: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0)
-				}
-			],
-			title: {
-				display: true,
-				text: 'Custom Chart Title'
-			}
-		};
+	var hum_data = {
+		labels: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0),
+		datasets: [
+			{
+				label: "Umidità",
+				fillColor: "rgba(220,220,220,0.2)",
+				strokeColor: "rgba(220,220,220,1)",
+				pointColor: "rgba(220,220,220,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(220,220,220,1)",
+				data: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0)
+			},
+		]
+	};
+	var hum_options = options;
+	var hum_ctx = document.getElementById("hum-canvas").getContext("2d");
+	var hum_chart = new Chart(hum_ctx).Line(hum_data, options);
 
-	var temp_options = {
-		title: {
-			display: true,
-			text: 'Custom Chart Title',
-			position: 'left'
-		},
-		legend: {
-			display: true,
-			text: 'prova',
-			labels: {
-					fontColor: 'rgb(255, 99, 132)'
-			}
-		},
-	}
+	var lum_data = {
+		labels: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0),
+		datasets: [
+			{
+				label: "Luminosità",
+				fillColor: "rgba(220,220,220,0.2)",
+				strokeColor: "rgba(220,220,220,1)",
+				pointColor: "rgba(220,220,220,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(220,220,220,1)",
+				data: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0)
+			},
+		]
+	};
+	var lum_options = options;
+	var lum_ctx = document.getElementById("lum-canvas").getContext("2d");
+	var lum_chart = new Chart(lum_ctx).Line(lum_data, options);
 
-	canvas = document.getElementById('hum-canvas'),
-		hum_ctx = canvas.getContext('2d'),
-		hum_startingData = {
-			labels: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0),
-			datasets: [
-				{
-					fillColor: "rgba(58, 162, 232,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					data: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0)
-				}
-			],
-		};
-	canvas = document.getElementById('lum-canvas'),
-		lum_ctx = canvas.getContext('2d'),
-		lum_startingData = {
-			labels: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0),
-			datasets: [
-				{
-					fillColor: "rgba(34, 139, 34,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					data: Array.apply(null, Array(NUMBER_OF_POINTS)).map(Number.prototype.valueOf,0)
-				}
-			],
-			options: {
-				title: {
-					display: true,
-					text: 'Custom Chart Title'
-				}
-			}
-		};
-
-
-	// Reduce the animation steps for demo clarity.
-	var temp_chart = new Chart(temp_ctx).Line(temp_startingData, temp_options);
-	var hum_chart = new Chart(hum_ctx).Line(hum_startingData, {});
-	var lum_chart = new Chart(lum_ctx).Line(lum_startingData);
+	// Add new values
 
 	var prevTime = undefined;
 
@@ -90,7 +79,6 @@ function createPlots(){
 		last_request.send();
 		var measure = JSON.parse(last_request.response);
 
-		// Add two random numbers for each dataset
 		if (measure.temperature < 1000 & measure.humidity < 1000 & measure.brightness < 1000) {
 			if (prevTime!=measure.time) {
 				var correctedTemp = parseInt(measure.temperature) + (Math.random()-0.5)*1;
