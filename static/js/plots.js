@@ -16,9 +16,9 @@ function createPlots() {
 		datasets: [
 			{
 				label: "Temperature",
-				fillColor: "rgba(220,220,220,0.2)",
-				strokeColor: "rgba(220,220,220,1)",
-				pointColor: "rgba(220,220,220,1)",
+				fillColor: "rgba(237,72,47,0.2)",
+				strokeColor: "rgba(237,72,47,1)",
+				pointColor: "rgba(237,72,47,1)",
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
 				pointHighlightStroke: "rgba(220,220,220,1)",
@@ -35,9 +35,9 @@ function createPlots() {
 		datasets: [
 			{
 				label: "Umidità",
-				fillColor: "rgba(220,220,220,0.2)",
-				strokeColor: "rgba(220,220,220,1)",
-				pointColor: "rgba(220,220,220,1)",
+				fillColor: "rgba(58,162,232,0.2)",
+				strokeColor: "rgba(58,162,232,1)",
+				pointColor: "rgba(58,162,232,1)",
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
 				pointHighlightStroke: "rgba(220,220,220,1)",
@@ -54,9 +54,9 @@ function createPlots() {
 		datasets: [
 			{
 				label: "Luminosità",
-				fillColor: "rgba(220,220,220,0.2)",
-				strokeColor: "rgba(220,220,220,1)",
-				pointColor: "rgba(220,220,220,1)",
+				fillColor: "rgba(34,139,34,0.2)",
+				strokeColor: "rgba(34,139,34,1)",
+				pointColor: "rgba(34,139,34,1)",
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
 				pointHighlightStroke: "rgba(220,220,220,1)",
